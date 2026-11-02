@@ -20,4 +20,203 @@
 <section class="assistant-panel" id="assistantPanel" aria-label="Attorney Freeman virtual assistant" hidden><div class="assistant-header"><img src="assets/freeman-cartoon-v2.png" alt=""><div><strong>Attorney Freeman</strong><small>Woodmere Law · Virtual assistant</small></div><button aria-label="Close virtual assistant" onclick="toggleAssistant(false)">×</button></div><div class="assistant-content"><span class="assistant-note">WEBSITE PREVIEW</span><h3>A little guidance.<br>A clearer next step.</h3><div class="assistant-message">Sorry, this assistant is disabled in this preview.</div><p>When enabled, this virtual assistant could answer common questions about the firm, help you find information about practice areas, and guide you toward requesting a consultation.</p><p class="assistant-fine">This is a virtual assistant concept, not a live conversation with Attorney Freeman. It would not provide legal advice.</p><a class="btn" href="tel:7573000309">Call Woodmere Law ↗</a></div><div class="assistant-input" aria-disabled="true">Messaging is disabled in this preview <span>↗</span></div></section>
 <dialog id="consultation"><div class="modal"><button class="close" aria-label="Close consultation information" onclick="this.closest('dialog').close()">×</button><div class="eyebrow">WOODMERE LAW</div><h2>Let’s talk about<br>your next step.</h2><p>Online consultation requests are disabled in this website preview. To contact the firm, please call:</p><a class="btn" href="tel:7573000309">757.300.0309 ↗</a><p class="micro" style="margin-top:22px">No request has been sent and no appointment has been booked.</p></div></dialog>
 <script>function toggleAssistant(force){const panel=document.getElementById('assistantPanel');const open=typeof force==='boolean'?force:panel.hidden;panel.hidden=!open;document.querySelector('.freeman-launcher').setAttribute('aria-expanded',String(open));document.getElementById('greeting').hidden=true;if(open)panel.querySelector('button').focus()};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.getElementById('assistantPanel').hidden){toggleAssistant(false);document.querySelector('.freeman-launcher').focus()}});document.getElementById('consultation').addEventListener('click',function(e){if(e.target===this)this.close()});function showPagePreview(name){document.getElementById('previewPageName').textContent=name;document.getElementById('pagePreview').showModal()};function toggleNavigation(){const nav=document.getElementById('firmNav');const open=nav.classList.toggle('is-open');document.querySelector('.mobile-menu').setAttribute('aria-expanded',String(open))};document.querySelectorAll('.firm-nav a').forEach(a=>a.addEventListener('click',()=>{document.getElementById('firmNav').classList.remove('is-open');document.querySelector('.mobile-menu').setAttribute('aria-expanded','false')}));</script>
-<dialog id="pagePreview"><div class="modal"><button class="close" aria-label="Close page preview notice" onclick="this.closest('dialog').close()">×</button><div class="eyebrow">WOODMERE LAW · WEBSITE PREVIEW</div><h2 id="previewPageName">Client Reviews</h2><p>This page is planned for the full website. For now, this preview shows the homepage design and overall direction.</p><p class="micro">Client reviews would be added only after the firm approves the content.</p><button class="btn" onclick="document.getElementById('pagePreview').close()">Continue exploring ↗</button></div></dialog></body></html>
+<dialog id="pagePreview"><div class="modal"><button class="close" aria-label="Close page preview notice" onclick="this.closest('dialog').close()">×</button><div class="eyebrow">WOODMERE LAW · WEBSITE PREVIEW</div><h2 id="previewPageName">Client Reviews</h2><p>This page is planned for the full website. For now, this preview shows the homepage design and overall direction.</p><p class="micro">Client reviews would be added only after the firm approves the content.</p><button class="btn" onclick="document.getElementById('pagePreview').close()">Continue exploring ↗</button></div></dialog><!-- Consultation popup: visual preview only -->
+<style>
+  #consultationPreview {
+    width: min(460px, calc(100vw - 32px));
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 30px;
+    border: none;
+    border-radius: 14px;
+    background: #faf8f3;
+    color: #172a2b;
+    box-shadow: 0 20px 70px #0004;
+  }
+
+  #consultationPreview::backdrop {
+    background: #102426aa;
+  }
+
+  #consultationPreview h2 {
+    margin: 12px 0;
+    font: 34px/1.15 Georgia, serif;
+  }
+
+  #consultationPreview p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  #consultationPreview .popup-close {
+    float: right;
+    border: none;
+    background: transparent;
+    color: #172a2b;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  #consultationPreview fieldset {
+    margin: 20px 0 0;
+    padding: 0;
+    border: none;
+  }
+
+  #consultationPreview label {
+    display: block;
+    margin: 12px 0 5px;
+    font-size: 12px;
+  }
+
+  #consultationPreview input,
+  #consultationPreview select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #d8d9d0;
+    border-radius: 5px;
+    background: #fff;
+    color: #6b756e;
+    font: inherit;
+    opacity: 1;
+  }
+
+  #consultationPreview .popup-submit {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 5px;
+    background: #172a2b;
+    color: white;
+    font-size: 14px;
+    opacity: .65;
+    cursor: not-allowed;
+  }
+
+  #consultationPreview .preview-notice {
+    padding: 12px;
+    border-radius: 5px;
+    background: #e8ede3;
+    font-size: 12px;
+  }
+</style>
+
+<dialog
+  id="consultationPreview"
+  aria-labelledby="consultationPreviewTitle"
+  aria-describedby="consultationPreviewNotice"
+>
+  <button
+    type="button"
+    class="popup-close"
+    aria-label="Close consultation preview"
+    autofocus
+  >×</button>
+
+  <p class="eyebrow">WOODMERE LAW</p>
+  <h2 id="consultationPreviewTitle">
+    Let’s talk about your next step.
+  </h2>
+
+  <p>
+    Have a criminal defense, traffic or custody matter?
+    Request a consultation with Woodmere Law.
+  </p>
+
+  <p class="preview-notice" id="consultationPreviewNotice">
+    <strong>Preview only.</strong> This form is disabled
+    and does not collect or send information.
+  </p>
+
+  <fieldset disabled aria-label="Consultation form preview">
+    <label for="previewName">Name</label>
+    <input id="previewName" type="text" placeholder="Your name">
+
+    <label for="previewEmail">Email</label>
+    <input id="previewEmail" type="email" placeholder="Your email">
+
+    <label for="previewPhone">Phone</label>
+    <input id="previewPhone" type="tel" placeholder="Your phone number">
+
+    <label for="previewMatter">Type of matter</label>
+    <select id="previewMatter">
+      <option>Select a matter</option>
+      <option>Criminal defense</option>
+      <option>DUI or traffic</option>
+      <option>Child custody</option>
+      <option>Other / unsure</option>
+    </select>
+
+    <button type="button" class="popup-submit" disabled>
+      Request a Consultation
+    </button>
+  </fieldset>
+
+  <p style="font-size: 10px; color: #6b756e; margin-top: 16px;">
+    Viewing this preview does not create an attorney-client relationship.
+  </p>
+</dialog>
+
+<script>
+(() => {
+  const popup = document.getElementById("consultationPreview");
+  const sessionKey = "woodmere-consultation-preview-shown";
+  let shown = false;
+  let previousFocus = null;
+
+  try {
+    shown = sessionStorage.getItem(sessionKey) === "yes";
+  } catch (_) {}
+
+  function checkScroll() {
+    if (shown) return;
+
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    if (scrollableHeight <= 0) return;
+    if (window.scrollY / scrollableHeight < 0.75) return;
+
+    // Avoid opening over another popup or the website assistant.
+    if (document.querySelector("dialog[open]")) return;
+
+    const assistant = document.getElementById("assistantPanel");
+    if (assistant && !assistant.hidden) return;
+
+    shown = true;
+    previousFocus = document.activeElement;
+
+    try {
+      sessionStorage.setItem(sessionKey, "yes");
+    } catch (_) {}
+
+    popup.showModal();
+    window.removeEventListener("scroll", checkScroll);
+  }
+
+  popup.querySelector(".popup-close").addEventListener("click", () => {
+    popup.close();
+  });
+
+  popup.addEventListener("click", (event) => {
+    if (event.target !== popup) return;
+
+    const bounds = popup.getBoundingClientRect();
+    const outside =
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom;
+
+    if (outside) popup.close();
+  });
+
+  popup.addEventListener("close", () => {
+    if (previousFocus instanceof HTMLElement) previousFocus.focus();
+  });
+
+  window.addEventListener("scroll", checkScroll, { passive: true });
+})();
+</script></body></html>
